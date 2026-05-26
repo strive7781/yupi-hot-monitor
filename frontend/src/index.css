@@ -5,44 +5,62 @@
 @layer base {
   body {
     @apply bg-radar-bg text-radar-text font-body antialiased;
-    background-image:
-      radial-gradient(ellipse at 20% 50%, rgba(255, 107, 43, 0.04) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, rgba(26, 64, 53, 0.6) 0%, transparent 40%);
     min-height: 100vh;
   }
 
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
   }
   ::-webkit-scrollbar-track {
-    background: #0a1f1a;
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1a4035;
+    background: rgba(0, 212, 255, 0.2);
     border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 212, 255, 0.35);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
 @layer components {
-  .card {
-    @apply bg-radar-surface border border-radar-border rounded-lg;
+  .glass-panel {
+    @apply bg-radar-surface/80 border border-radar-border/60 backdrop-blur-xl;
   }
   .btn-accent {
-    @apply bg-radar-accent text-white px-4 py-2 rounded-md font-medium
-           hover:bg-radar-glow transition-all duration-200
-           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-gradient-to-r from-radar-accent/90 to-cyan-400/80 text-radar-bg px-4 py-2 rounded-lg font-semibold
+           transition-all duration-200
+           active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none;
+  }
+  .btn-accent:hover:not(:disabled) {
+    box-shadow: 0 0 24px rgba(0, 212, 255, 0.15);
   }
   .btn-ghost {
-    @apply border border-radar-border text-radar-muted px-3 py-1.5 rounded-md
-           hover:border-radar-accent hover:text-radar-accent transition-all duration-200;
+    @apply border border-radar-border/80 text-radar-muted px-3 py-1.5 rounded-lg
+           hover:border-radar-accent/60 hover:text-radar-accent hover:bg-radar-accent/5
+           transition-all duration-200;
   }
   .input-field {
-    @apply bg-radar-bg border border-radar-border rounded-md px-3 py-2
-           text-radar-text placeholder-radar-muted
-           focus:outline-none focus:border-radar-accent focus:ring-1 focus:ring-radar-accent/30
+    @apply bg-radar-bg/80 border border-radar-border/80 rounded-lg px-3 py-2
+           text-radar-text placeholder-radar-muted/70
+           focus:outline-none focus:border-radar-accent/70 focus:ring-1 focus:ring-radar-accent/25
            w-full transition-colors;
   }
   .source-badge {
-    @apply text-xs font-mono px-2 py-0.5 rounded-full border;
+    @apply text-[10px] font-mono px-2 py-0.5 rounded-md border uppercase tracking-wider;
+  }
+  .stat-pill {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono
+           border border-radar-border/60 bg-radar-bg/50;
   }
 }
