@@ -25,7 +25,7 @@ AI 编程热点监控系统 —— 多源采集、AI 过滤、实时通知，让
 ### 1. 克隆项目
 
 ```bash
-git clone https://github.com/<your-username>/yupi-hot-monitor.git
+git clone https://github.com/strive7781/yupi-hot-monitor.git
 cd yupi-hot-monitor
 ```
 
